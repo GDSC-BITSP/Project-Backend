@@ -1,4 +1,4 @@
 env/
 /.vscode/
 .idea/
-./db.sqlite3
+/db.sqlite3
