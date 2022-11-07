@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import Club, ClubHead
+from .models import Club, ClubHead, Event
 
 
 @api_view(['GET'])
@@ -57,5 +57,21 @@ def about(request, id):
         'recruitment_link': club.recruit_link,
         'clubheads': clubheads,
 
+    }, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def event(request, id):
+    try:
+        event = Event.objects.get(id=id)
+    except ObjectDoesNotExist:
+        return Response({
+            'message': 'Error! Event with given id does not exist in the database'
+        }, status=status.HTTP_404_NOT_FOUND)
+
+    return Response({
+        'club_name': event.club,
+        'event_name': event.name,
+        'date': event.date
     }, status=status.HTTP_200_OK)
 
