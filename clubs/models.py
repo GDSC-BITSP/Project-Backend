@@ -5,15 +5,15 @@ from taggit.managers import TaggableManager
 
 
 def upload_path_generator(instance, filename):
-    return f'images/clubs/{instance.name}/{filename}'
+    return f'clubs/{instance.name}/{filename}'
 
 
 def upload_path_generator2(instance, filename):
-    return f'images/events/{instance.name}/{filename}'
+    return f'events/{instance.name}/{filename}'
 
 
 def upload_path_generator3(instance, filename):
-    return f'images/clubheads/{instance.name}/{filename}'
+    return f'clubheads/{instance.name}/{filename}'
 
 
 class Club(models.Model):
