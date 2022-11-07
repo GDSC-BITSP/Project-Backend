@@ -1,9 +1,7 @@
-import status as status
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
 from .models import Club, ClubHead, Event
 
@@ -11,14 +9,39 @@ from .models import Club, ClubHead, Event
 @api_view(['GET'])
 def home(request):
     clubs = []
+    depts = []
+    assocs = []
+    techteams = []
     for club in Club.objects.all():
-        clubs.append({
-            'id': club.id,
-            'name': club.name,
-            'img': club.logo
-        })
+        if club.type == 'club':
+            clubs.append({
+                'id': club.id,
+                'name': club.name,
+                'img': club.logo
+            })
+        elif club.type == 'department':
+            depts.append({
+                'id': club.id,
+                'name': club.name,
+                'img': club.logo
+            })
+        elif club.type == 'assoc':
+            assocs.append({
+                'id': club.id,
+                'name': club.name,
+                'img': club.logo
+            })
+        elif club.type == 'techteam':
+            techteams.append({
+                'id': club.id,
+                'name': club.name,
+                'img': club.logo
+            })
     return Response({
-        clubs
+        'clubs': clubs,
+        'departments': depts,
+        'assocs': assocs,
+        'techteam': techteams
     }, status=status.HTTP_200_OK)
 
 
@@ -56,7 +79,6 @@ def about(request, id):
         'recruitment_description': club.recruit_desc,
         'recruitment_link': club.recruit_link,
         'clubheads': clubheads,
-
     }, status=status.HTTP_200_OK)
 
 
@@ -76,18 +98,17 @@ def event(request, id):
     }, status=status.HTTP_200_OK)
 
 
-
-@api_view(['GET']):
+@api_view(['GET'])
 def recruiting(request, id):
     try:
-        club = Club.objects.get(id = id)
+        club = Club.objects.get(id=id)
     except ObjectDoesNotExist:
         return Response({
-            'message' : 'Error! No such club exists in the database' 
-        }, status = status.HTTP_404_NOTFOUND)
+            'message': 'Error! No such club exists in the database'
+        }, status=status.HTTP_404_NOT_FOUND)
 
     return Response({
-        'name':club.name,
+        'name': club.name,
         'recruit_link': club.recruit_link,
         'recruit_desc': club.recruit_desc,
     })
