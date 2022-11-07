@@ -35,3 +35,11 @@ class Event(models.Model):
     name = models.CharField(max_length=200)
     desc = models.TextField(max_length=1024, blank=True)
     img = models.ImageField(upload_to=upload_path_generator2, blank=True, null=True)
+
+
+
+class ClubHead(models.Model):
+    club = models.ForeignKey(Club, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    POR = models.CharField(max_length=1024, blank = True)
+    img = models.ImageField(upload_to=upload_path_generator2, blank=True, null=True)
