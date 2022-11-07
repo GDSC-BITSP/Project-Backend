@@ -19,4 +19,12 @@ class Club(models.Model):
     def __str__(self):
         return self.title
 
+class Event(models.Model):
+    club = models.ForeignKey(Club, on_delete=models.CASCADE)
+    date = models.DateTimeField(blank= True, Null = True)
+    name = models.CharField(max_length= 200)
+    desc = models.TextField(max_length = 1024, blank=True)
+    
+
+
     
