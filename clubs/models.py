@@ -6,7 +6,11 @@ from taggit.managers import TaggableManager
 
 
 def upload_path_generator(instance, filename):
-    return f'images/{instance.name}/{filename}'
+    return f'images/clubs/{instance.name}/{filename}'
+
+
+def upload_path_generator2(instance, filename):
+    return f'images/events/{instance.name}/{filename}'
 
 
 class Club(models.Model):
@@ -30,3 +34,4 @@ class Event(models.Model):
     date = models.DateTimeField(blank=True, Null=True)
     name = models.CharField(max_length=200)
     desc = models.TextField(max_length=1024, blank=True)
+    img = models.ImageField(upload_to=upload_path_generator2, blank=True, null=True)
