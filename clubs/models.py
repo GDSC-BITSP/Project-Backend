@@ -36,6 +36,7 @@ class Club(models.Model):
     recruit_desc = models.TextField(max_length=200, null=True)
     event_details = models.TextField()
     last_updated = models.DateTimeField(default=timezone.now)
+    is_recruiting = models.BooleanField(default = False)
 
     def __str__(self):
         return self.name

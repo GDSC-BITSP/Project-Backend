@@ -75,3 +75,19 @@ def event(request, id):
         'date': event.date
     }, status=status.HTTP_200_OK)
 
+
+
+@api_view(['GET']):
+def recruiting(request, id):
+    try:
+        club = Club.objects.get(id = id)
+    except ObjectDoesNotExist:
+        return Response({
+            'message' : 'Error! No such club exists in the database' 
+        }, status = status.HTTP_404_NOTFOUND)
+
+    return Response({
+        'name':club.name,
+        'recruit_link': club.recruit_link,
+        'recruit_desc': club.recruit_desc,
+    })
