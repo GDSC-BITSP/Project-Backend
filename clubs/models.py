@@ -18,6 +18,13 @@ def upload_path_generator3(instance, filename):
 
 
 class Club(models.Model):
+    TYPE_CHOICES = (
+        ('club', 'club'),
+        ('department', 'department'),
+        ('assoc', 'assoc'),
+        ('techteam', 'techteam')
+    )
+    type = models.CharField(choices=TYPE_CHOICES, max_length=20)
     name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to=upload_path_generator, null=True)
     skill = TaggableManager()
