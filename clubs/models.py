@@ -23,7 +23,7 @@ class Club(models.Model):
         ('assoc', 'assoc'),
         ('techteam', 'techteam')
     )
-    type = models.CharField(choices=TYPE_CHOICES, max_length=20)
+    type = models.CharField(choices=TYPE_CHOICES, max_length=20, default='club')
     name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to=upload_path_generator, null=True)
     skill = TaggableManager()
