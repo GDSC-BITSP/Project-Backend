@@ -60,19 +60,19 @@ def about(request, id):
             'name': event.name,
             'description': event.desc,
             'date': event.date,
-            'image': event.img
+            'image': event.img.url
         })
     clubheads = []
     for clubhead in ClubHead.objects.all():
         clubheads.append({
             'name': clubhead.name,
             'por': clubhead.POR,
-            'image': clubhead.img
+            'image': clubhead.img.url
         })
 
     return Response({
         'name': club.name,
-        'logo': club.logo,
+        'logo': club.logo.url,
         'skills': [tag for tag in club.skill.all()],
         'description': club.description,
         'events': events,
