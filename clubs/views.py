@@ -111,4 +111,5 @@ def recruiting(request, id):
         'name': club.name,
         'recruit_link': club.recruit_link,
         'recruit_desc': club.recruit_desc,
+        'recruiting': club.is_recruiting
     })
