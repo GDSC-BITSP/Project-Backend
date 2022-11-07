@@ -3,3 +3,5 @@ env/
 .idea/
 /db.sqlite3
 clubs/migrations/*
+/staticfiles/
+/images/

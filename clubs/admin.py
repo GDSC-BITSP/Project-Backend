@@ -1,5 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
-from clubs.models import Club
+from clubs.models import Club, ClubHead, Event
+
 admin.site.register(Club)
+admin.site.register(Event)
+admin.site.register(ClubHead)

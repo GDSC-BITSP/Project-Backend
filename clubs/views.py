@@ -17,25 +17,25 @@ def home(request):
             clubs.append({
                 'id': club.id,
                 'name': club.name,
-                'img': club.logo
+                'img': club.logo.url
             })
         elif club.type == 'department':
             depts.append({
                 'id': club.id,
                 'name': club.name,
-                'img': club.logo
+                'img': club.logo.url
             })
         elif club.type == 'assoc':
             assocs.append({
                 'id': club.id,
                 'name': club.name,
-                'img': club.logo
+                'img': club.logo.url
             })
         elif club.type == 'techteam':
             techteams.append({
                 'id': club.id,
                 'name': club.name,
-                'img': club.logo
+                'img': club.logo.url
             })
     return Response({
         'clubs': clubs,
