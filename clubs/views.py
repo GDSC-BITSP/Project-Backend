@@ -67,6 +67,7 @@ def about(request, id):
         except ValueError:
             imgurl = ""
         events.append({
+            'id': event.id,
             'name': event.name,
             'description': event.desc,
             'date': event.date,
@@ -107,7 +108,7 @@ def event(request, id):
         }, status=status.HTTP_404_NOT_FOUND)
 
     return Response({
-        'club_name': event.club,
+        'club_name': event.club.name,
         'event_name': event.name,
         'date': event.date
     }, status=status.HTTP_200_OK)
