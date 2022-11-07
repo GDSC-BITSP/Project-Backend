@@ -13,29 +13,34 @@ def home(request):
     assocs = []
     techteams = []
     for club in Club.objects.all():
+        imgurl = ""
+        try:
+            imgurl = club.logo.url
+        except ValueError:
+            imgurl = ""
         if club.type == 'club':
             clubs.append({
                 'id': club.id,
                 'name': club.name,
-                'img': club.logo.url
+                'img': imgurl
             })
         elif club.type == 'department':
             depts.append({
                 'id': club.id,
                 'name': club.name,
-                'img': club.logo.url
+                'img': imgurl
             })
         elif club.type == 'assoc':
             assocs.append({
                 'id': club.id,
                 'name': club.name,
-                'img': club.logo.url
+                'img': imgurl
             })
         elif club.type == 'techteam':
             techteams.append({
                 'id': club.id,
                 'name': club.name,
-                'img': club.logo.url
+                'img': imgurl
             })
     return Response({
         'clubs': clubs,
@@ -56,24 +61,34 @@ def about(request, id):
 
     events = []
     for event in club.event_set.all():
+        imgurl = ""
+        try:
+            imgurl = event.img.url
+        except ValueError:
+            imgurl = ""
         events.append({
             'name': event.name,
             'description': event.desc,
             'date': event.date,
-            'image': event.img.url
+            'image': imgurl
         })
     clubheads = []
     for clubhead in ClubHead.objects.all():
+        imgurl = ""
+        try:
+            imgurl = clubhead.img.url
+        except ValueError:
+            imgurl = ""
         clubheads.append({
             'name': clubhead.name,
             'por': clubhead.POR,
-            'image': clubhead.img.url
+            'image': imgurl
         })
 
     return Response({
         'name': club.name,
         'logo': club.logo.url,
-        'skills': [tag for tag in club.skill.all()],
+        'skills': [tag.name for tag in club.skill.all()],
         'description': club.description,
         'events': events,
         'recruitment_description': club.recruit_desc,
