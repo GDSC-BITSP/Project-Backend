@@ -13,6 +13,10 @@ def upload_path_generator2(instance, filename):
     return f'images/events/{instance.name}/{filename}'
 
 
+def upload_path_generator3(instance, filename):
+    return f'images/clubheads/{instance.name}/{filename}'
+
+
 class Club(models.Model):
     name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to=upload_path_generator, null=True)
@@ -22,6 +26,7 @@ class Club(models.Model):
     por_txt = models.TextField()
     por_img = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, null=True)
     recruit_link = models.URLField(max_length=200, null=True)
+    recruit_desc = models.TextField(max_length=200, null=True)
     event_details = models.TextField()
     last_updated = models.DateTimeField(default=timezone.now)
 
@@ -37,9 +42,8 @@ class Event(models.Model):
     img = models.ImageField(upload_to=upload_path_generator2, blank=True, null=True)
 
 
-
 class ClubHead(models.Model):
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    POR = models.CharField(max_length=1024, blank = True)
-    img = models.ImageField(upload_to=upload_path_generator2, blank=True, null=True)
+    POR = models.CharField(max_length=1024, blank=True)
+    img = models.ImageField(upload_to=upload_path_generator3, blank=True, null=True)
