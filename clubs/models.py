@@ -1,7 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
-from django.urls import reverse
 from taggit.managers import TaggableManager
 
 
@@ -36,7 +35,7 @@ class Club(models.Model):
     recruit_desc = models.TextField(max_length=200, null=True)
     event_details = models.TextField()
     last_updated = models.DateTimeField(default=timezone.now)
-    is_recruiting = models.BooleanField(default = False)
+    is_recruiting = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -44,7 +43,7 @@ class Club(models.Model):
 
 class Event(models.Model):
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
-    date = models.DateTimeField(blank=True, Null=True)
+    date = models.DateTimeField(blank=True, null=True)
     name = models.CharField(max_length=200)
     desc = models.TextField(max_length=1024, blank=True)
     img = models.ImageField(upload_to=upload_path_generator2, blank=True, null=True)
