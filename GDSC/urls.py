@@ -18,9 +18,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('clubs.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 ]
 
 if settings.DEBUG:
